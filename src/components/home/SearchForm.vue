@@ -19,7 +19,7 @@ export default {
     background-position: 96%;
     color: #212121;
     font-size: 18px;
-    padding: 15px 50px 15px 30px;
+    padding: 10px 35px 10px 20px;
     width: 100%;
   }
 
@@ -30,5 +30,11 @@ export default {
 
   .search__input::placeholder {
     color: #999;
+  }
+
+  @media (min-width: 768px) {
+    .search__input {
+      padding: 15px 50px 15px 30px;
+    }
   }
 </style>

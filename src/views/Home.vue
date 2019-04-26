@@ -24,12 +24,22 @@ export default {
 <style scoped>
   .home__brand {
     color: var(--color-primary);
-    font-size: 48px;
+    font-size: 32px;
     margin-top: 130px;
     text-align: center;
   }
 
   .home__search {
-    margin: 50px auto 30px auto;
+    margin: 30px auto 20px auto;
+  }
+
+  @media (min-width: 768px) {
+    .home__brand {
+      font-size: 3rem;
+    }
+
+    .home__search {
+      margin: 50px auto 30px auto;
+    }
   }
 </style>

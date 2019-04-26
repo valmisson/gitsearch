@@ -29,9 +29,13 @@ export default {
     text-align: center;
   }
 
+  .search__type-item:first-child {
+    margin-left: -15px;
+  }
+
   .search__type-item:last-child {
-    margin-left: 35px;
-    padding-left: 20px;
+    margin-left: 20px;
+    padding-left: 5px;
     border-left: 1px solid #B2B2B2;
   }
 
@@ -48,5 +52,12 @@ export default {
     cursor: pointer;
     font-size: 1rem;
     transition: all 0.25s ease;
+  }
+
+  @media (min-width: 768px) {
+    .search__type-item:last-child {
+      margin-left: 35px;
+      padding-left: 20px;
+    }
   }
 </style>
