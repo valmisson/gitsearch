@@ -11,6 +11,11 @@ export default {
 </script>
 
 <style>
+  :root {
+    --color-primary: #0AEC57;
+    --color-font-primary: #777777;
+  }
+
   body {
     font-family: 'Roboto', sans-serif;
   }

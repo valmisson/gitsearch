@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <h1>Search Github</h1>
+  <div class="home container">
+    <h1 class="home__brand">Search Github</h1>
   </div>
 </template>
 
@@ -9,3 +9,12 @@ export default {
   name: 'Home'
 }
 </script>
+
+<style scoped>
+  .home__brand {
+    color: var(--color-primary);
+    font-size: 48px;
+    margin-top: 130px;
+    text-align: center;
+  }
+</style>
