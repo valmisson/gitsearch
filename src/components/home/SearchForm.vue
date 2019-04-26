@@ -6,8 +6,7 @@
 
 <script>
 export default {
-  name: 'SearchForm',
-  components: {}
+  name: 'SearchForm'
 }
 </script>
 
@@ -15,7 +14,7 @@ export default {
   .search__input {
     border: 1px solid #ccc;
     border-radius: 25px;
-    background-image: url('../assets/images/search-icon.svg');
+    background-image: url('../../assets/images/search-icon.svg');
     background-repeat: no-repeat;
     background-position: 96%;
     color: #212121;
