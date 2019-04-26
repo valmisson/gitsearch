@@ -1,12 +1,19 @@
 <template>
-  <div class="home container">
+  <main class="home container">
     <h1 class="home__brand">Search Github</h1>
-  </div>
+
+    <search-form class="home__search col-md-6"/>
+  </main>
 </template>
 
 <script>
+import SearchForm from '@/components/SearchForm.vue'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    SearchForm
+  }
 }
 </script>
 
@@ -16,5 +23,9 @@ export default {
     font-size: 48px;
     margin-top: 130px;
     text-align: center;
+  }
+
+  .home__search {
+    margin: 60px auto;
   }
 </style>
