@@ -12,7 +12,7 @@ export default {
 
 <style>
   :root {
-    --color-primary: #B370B0;
+    --color-primary: #09dd38;
     --color-font-primary: #777777;
   }
 
