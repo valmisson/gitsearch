@@ -7,7 +7,7 @@
 
       <div class="resultado__item-info">
         <h2 class="resultado__item-title">{{ items.full_name }}</h2>
-        <p class="resultado__item-description">{{ items.description }}</p>
+        <p class="resultado__item-description">{{ description }}</p>
       </div>
 
       <div class="resultado__item-stars">
@@ -36,9 +36,25 @@ export default {
     },
 
     license () {
-      if (!this.items.license) return 'No license'
+      const { license } = this.items
 
-      return this.items.license.name
+      if (!license) return 'No license'
+
+      return license.name
+    },
+
+    description () {
+      const { description } = this.items
+
+      if (!description) return 'No description'
+
+      const descriptionSplit = description.split(' ')
+
+      if (descriptionSplit.length > 10) {
+        return descriptionSplit.slice(0, 10).join(' ') + '...'
+      }
+
+      return description
     },
 
     stars () {
@@ -77,8 +93,8 @@ export default {
 
   .resultado__item-avatar > img {
     border-radius: 3px;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
   }
 
   .resultado__item-info {
@@ -89,13 +105,14 @@ export default {
     color: #0366D6;
     font-size: 18px;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   .resultado__item-description {
     font-size: 14px;
     font-style: italic;
-    margin: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
   }
 
   .resultado__item-stars,
@@ -107,7 +124,7 @@ export default {
     font-size: 14px;
     position: absolute;
     bottom: 15px;
-    left: 100px;
+    left: 90px;
   }
 
   .resultado__item-license {
@@ -130,6 +147,7 @@ export default {
 
     .resultado__item-description {
       font-size: 1rem;
+      margin-bottom: 10px;
     }
 
     .resultado__item-stars,
