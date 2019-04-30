@@ -1,6 +1,6 @@
 <template>
   <div class="resultado__count col-12">
-    <h3>{{ count }} resultados</h3>
+    <h3>{{ count.toLocaleString() }} resultados</h3>
   </div>
 </template>
 
@@ -9,7 +9,6 @@ export default {
   name: 'ResultadoCount',
   props: {
     count: {
-      type: String,
       required: true
     }
   }

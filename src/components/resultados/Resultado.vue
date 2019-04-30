@@ -1,23 +1,23 @@
 <template>
   <article class="resultado__item">
-    <a href="#" class="resultado__item-link">
+    <a :href="items.html_url" target="_blank" class="resultado__item-link">
       <figure class="resultado__item-avatar">
-        <img src="@/assets/images/avatar.png" alt="Resultado avatar">
+        <img :src="items.owner.avatar_url" alt="Resultado avatar">
       </figure>
 
       <div class="resultado__item-info">
-        <h2 class="resultado__item-title">airbnb/javascript</h2>
-        <p class="resultado__item-description">JavaScript Style Guide</p>
+        <h2 class="resultado__item-title">{{ items.full_name }}</h2>
+        <p class="resultado__item-description">{{ items.description }}</p>
       </div>
 
       <div class="resultado__item-stars">
-        <img src="@/assets/images/star-icon.svg" alt="">
-        <span class="resultado__item-count">84.4k</span>
+        <img src="@/assets/images/star-icon.svg" alt="icon star">
+        <span class="resultado__item-count">{{ stars }}</span>
       </div>
 
       <footer class="resultado__item-footer">
-        <span class="resultado__item-language">JavaScript</span>
-        <span class="resultado__item-license">MIT License</span>
+        <span class="resultado__item-language">{{ language }}</span>
+        <span class="resultado__item-license">{{ license }}</span>
       </footer>
     </a>
   </article>
@@ -25,7 +25,34 @@
 
 <script>
 export default {
-  name: 'Resultado'
+  name: 'Resultado',
+  props: ['items'],
+
+  computed: {
+    language () {
+      if (!this.items.language) return 'No language'
+
+      return this.items.language
+    },
+
+    license () {
+      if (!this.items.license) return 'No license'
+
+      return this.items.license.name
+    },
+
+    stars () {
+      const { stargazers_count } = this.items
+
+      if (stargazers_count > 1000) {
+        const count = stargazers_count.toLocaleString()
+
+        return parseFloat(count).toFixed(1) + 'k'
+      }
+
+      return stargazers_count
+    }
+  }
 }
 </script>
 

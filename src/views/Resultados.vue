@@ -8,11 +8,11 @@
     </header>
 
     <section class="resultado">
-      <resultado-count count="526.630"/>
+      <resultado-count :count="totalResultado"/>
 
       <ul class="resultado__content row">
-        <li class="resultado__content-item col-lg-6">
-          <resultado />
+        <li v-for="item in resultado" :key="item.id" class="resultado__content-item col-lg-6">
+          <resultado :items="item" />
         </li>
       </ul>
 
@@ -48,6 +48,7 @@ export default {
 
   data () {
     return {
+      totalResultado: '',
       resultado: []
     }
   },
@@ -67,8 +68,9 @@ export default {
       try {
         const query = this.$route.query.q
         const repo = await HTTPClient.get(`search/repositories?q=${query}`)
-        const { items } = repo.data
+        const { total_count, items } = repo.data
 
+        this.totalResultado = total_count
         this.resultado = items
       } catch (error) {
         console.log(error)
@@ -131,7 +133,7 @@ export default {
     border: 1px solid #ccc;
     display: table;
     list-style: none;
-    margin: auto;
+    margin: 0 auto 25px auto;
     padding-left: 0;
   }
 
