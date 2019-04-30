@@ -1,12 +1,38 @@
 <template>
   <div>
-    <input type="text" placeholder="Pesquise no Github" class="search__input">
+    <input @keypress.enter="search" v-model="searchTerm" type="text" placeholder="Pesquise repositorio no Github" class="search__input">
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SearchForm'
+  name: 'SearchForm',
+
+  data () {
+    return {
+      searchTerm: ''
+    }
+  },
+
+  methods: {
+    search (e) {
+      const inputSearchEl = e.target
+
+      if (this.searchTerm.length > 0) {
+        inputSearchEl.classList.remove('error')
+
+        return this.$router.push({ path: '/search/repositorio', query: { q: this.searchTerm } })
+      }
+
+      inputSearchEl.classList.add('error')
+    }
+  },
+
+  mounted () {
+    const { q } = this.$route.query
+
+    this.searchTerm = q
+  }
 }
 </script>
 
@@ -30,6 +56,10 @@ export default {
 
   .search__input::placeholder {
     color: #999;
+  }
+
+  .search__input.error:focus {
+    border-color: #ed2f2f;
   }
 
   @media (min-width: 768px) {

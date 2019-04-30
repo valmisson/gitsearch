@@ -4,4 +4,4 @@ const HTTPClient = axios.create({
   baseURL: 'https://api.github.com/'
 })
 
-export default { HTTPClient }
+export default HTTPClient

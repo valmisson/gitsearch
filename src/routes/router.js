@@ -7,7 +7,7 @@ export default [
     component: Home
   },
   {
-    path: '/resultado',
+    path: '/search/repositorio/',
     name: 'resultado',
     component: () => import(/* webpackChunkName: "resultado" */ '@/views/Resultados.vue')
   }

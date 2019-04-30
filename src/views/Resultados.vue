@@ -35,6 +35,7 @@ import SearchForm from '@/components/home/SearchForm.vue'
 import ResultadoCount from '@/components/resultados/ResultadoCount.vue'
 import Resultado from '@/components/resultados/Resultado.vue'
 import Paginate from 'vuejs-paginate'
+import HTTPClient from '@/services'
 
 export default {
   name: 'Resultados',
@@ -43,6 +44,36 @@ export default {
     ResultadoCount,
     Resultado,
     Paginate
+  },
+
+  data () {
+    return {
+      resultado: []
+    }
+  },
+
+  mounted () {
+    this.get()
+  },
+
+  watch: {
+    '$route' (to, from) {
+      this.get()
+    }
+  },
+
+  methods: {
+    async get () {
+      try {
+        const query = this.$route.query.q
+        const repo = await HTTPClient.get(`search/repositories?q=${query}`)
+        const { items } = repo.data
+
+        this.resultado = items
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 }
 </script>
