@@ -6,8 +6,7 @@
       </h1>
       <search-form class="col-md-8 col-lg-6 offset-md-1 offset-lg-2" />
     </header>
-
-    <section class="resultado">
+    <section class="resultado" v-show="!isLoading">
       <resultado-count :count="totalResultado"/>
 
       <ul class="resultado__content row">
@@ -29,6 +28,8 @@
         :page-class="'page-item'" />
 
     </section>
+
+    <loading v-if="isLoading" />
   </main>
 </template>
 
@@ -36,6 +37,7 @@
 import SearchForm from '@/components/home/SearchForm.vue'
 import ResultadoCount from '@/components/resultados/ResultadoCount.vue'
 import Resultado from '@/components/resultados/Resultado.vue'
+import Loading from '@/components/layout/Loading.vue'
 import Paginate from 'vuejs-paginate'
 import HTTPClient from '@/services'
 
@@ -45,6 +47,7 @@ export default {
     SearchForm,
     ResultadoCount,
     Resultado,
+    Loading,
     Paginate
   },
 
@@ -52,7 +55,8 @@ export default {
     return {
       totalResultado: '',
       resultado: [],
-      pageNumber: parseInt(this.$route.query.page)
+      pageNumber: parseInt(this.$route.query.page),
+      isLoading: false
     }
   },
 
@@ -71,12 +75,16 @@ export default {
   methods: {
     async get (page) {
       try {
+        this.isLoading = true
+
         const query = this.$route.query.q
         const repo = await HTTPClient.get(`search/repositories?q=${query}&page=${page}`)
         const { total_count, items } = repo.data
 
         this.totalResultado = total_count
         this.resultado = items
+
+        this.isLoading = false
       } catch (error) {
         console.log(error)
       }
@@ -96,6 +104,10 @@ export default {
 </script>
 
 <style scoped>
+  .resultados {
+    overflow: hidden;
+  }
+
   .resultados__header {
     align-items: center;
     justify-content: center;
