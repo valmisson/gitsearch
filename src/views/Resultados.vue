@@ -25,7 +25,8 @@
         :next-class="'controlls'"
         :container-class="'pagination'"
         :page-link-class="'page-link'"
-        :page-class="'page-item'" />
+        :page-class="'page-item'"
+        v-if="resultado.length > 0" />
 
     </section>
 
@@ -61,19 +62,19 @@ export default {
   },
 
   mounted () {
-    this.get(this.pageNumber)
+    this.getRepositories(this.pageNumber)
   },
 
   watch: {
     '$route' () {
       this.pageNumber = parseInt(this.$route.query.page)
 
-      this.get(this.pageNumber)
+      this.getRepositories(this.pageNumber)
     }
   },
 
   methods: {
-    async get (page) {
+    async getRepositories (page) {
       try {
         this.isLoading = true
 
@@ -193,7 +194,7 @@ export default {
 
   .page-link {
     display: block;
-    padding: 10px 7px;
+    padding: 10px 8px;
   }
 
   .page-link,
