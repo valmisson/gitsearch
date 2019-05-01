@@ -17,7 +17,9 @@
       </ul>
 
       <paginate
-        :page-count="100"
+        v-model="pageNumber"
+        :click-handler="pagination"
+        :page-count="34"
         :prev-text="'Anterior'"
         :next-text="'Próximo'"
         :prev-class="'controlls'"
@@ -49,25 +51,28 @@ export default {
   data () {
     return {
       totalResultado: '',
-      resultado: []
+      resultado: [],
+      pageNumber: parseInt(this.$route.query.page)
     }
   },
 
   mounted () {
-    this.get()
+    this.get(this.pageNumber)
   },
 
   watch: {
-    '$route' (to, from) {
-      this.get()
+    '$route' () {
+      this.pageNumber = parseInt(this.$route.query.page)
+
+      this.get(this.pageNumber)
     }
   },
 
   methods: {
-    async get () {
+    async get (page) {
       try {
         const query = this.$route.query.q
-        const repo = await HTTPClient.get(`search/repositories?q=${query}`)
+        const repo = await HTTPClient.get(`search/repositories?q=${query}&page=${page}`)
         const { total_count, items } = repo.data
 
         this.totalResultado = total_count
@@ -75,6 +80,16 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+
+    pagination (pageNum) {
+      const { path, query } = this.$route
+
+      this.pageNumber = pageNum
+
+      this.$router.push({ path, query: { ...query, page: pageNum } })
+
+      window.scrollTo(0, 0)
     }
   }
 }
