@@ -1,6 +1,7 @@
 {
-  "name": "search-github",
-  "version": "0.1.0",
+  "name": "gitsearch",
+  "version": "1.1.0",
+  "description": "Buscar repositórios do Github",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

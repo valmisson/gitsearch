@@ -2,7 +2,7 @@
   <main class="resultados container">
     <header class="resultados__header row">
       <h1 class="resultados__header-brand">
-        <a href="/">Search Github</a>
+        <a href="/">GitSearch</a>
       </h1>
       <search-form class="col-md-8 col-lg-6 offset-md-1 offset-lg-2" />
     </header>

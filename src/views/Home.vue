@@ -1,6 +1,6 @@
 <template>
   <main class="home container">
-    <h1 class="home__brand">Search Github</h1>
+    <h1 class="home__brand">GitSearch</h1>
 
     <search-form class="home__search col-md-10 col-lg-6"/>
   </main>
