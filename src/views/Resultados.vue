@@ -19,8 +19,8 @@
         v-model="pageNumber"
         :click-handler="pagination"
         :page-count="34"
-        :prev-text="'Anterior'"
-        :next-text="'Próximo'"
+        :prev-text="'&#x3c;'"
+        :next-text="'&#x3e;'"
         :prev-class="'controlls'"
         :next-class="'controlls'"
         :container-class="'pagination'"
@@ -130,7 +130,8 @@ export default {
 
   .resultado__content {
     margin-top: 20px;
-    padding-left: 0;
+    padding-left: 1px;
+    padding-right: 1px;
   }
 
   .resultado__content-item {
@@ -194,7 +195,7 @@ export default {
 
   .page-link {
     display: block;
-    padding: 10px 8px;
+    padding: 10px 9px;
   }
 
   .page-link,
@@ -213,7 +214,8 @@ export default {
   .controlls > a {
     color: var(--color-primary);
     display: block;
-    padding: 10px 7px;
+    font-weight: bolder;
+    padding: 10px 15px;
   }
 
   .controlls.disabled > a {

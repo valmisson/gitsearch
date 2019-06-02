@@ -12,18 +12,18 @@ export default {
   .lds-ring {
     display: flex;
     position: relative;
-    margin: 35px auto;
-    width: 64px;
-    height: 64px;
+    margin: 60px auto;
+    width: 44px;
+    height: 44px;
   }
   .lds-ring div {
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: 51px;
-    height: 51px;
-    margin: 6px;
-    border: 6px solid var(--color-primary);
+    width: 38px;
+    height: 38px;
+    margin: 4px;
+    border: 4px solid var(--color-primary);
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: var(--color-primary) transparent transparent transparent;

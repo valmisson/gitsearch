@@ -1,25 +1,27 @@
 <template>
   <article class="resultado__item">
-    <a :href="items.html_url" target="_blank" class="resultado__item-link">
-      <figure class="resultado__item-avatar">
-        <img :src="items.owner.avatar_url" alt="Resultado avatar">
-      </figure>
+    <figure class="resultado__item-avatar">
+      <img :src="items.owner.avatar_url" alt="Resultado avatar">
+    </figure>
 
+    <div class="resultado__item-content">
       <div class="resultado__item-info">
-        <h2 class="resultado__item-title">{{ items.full_name }}</h2>
+        <a :href="items.html_url" target="_blank" class="resultado__item-link">
+          <h2 class="resultado__item-title">{{ items.full_name }}</h2>
+        </a>
         <p class="resultado__item-description">{{ description }}</p>
-      </div>
-
-      <div class="resultado__item-stars">
-        <img src="@/assets/images/star-icon.svg" alt="icon star">
-        <span class="resultado__item-count">{{ stars }}</span>
       </div>
 
       <footer class="resultado__item-footer">
         <span class="resultado__item-language">{{ language }}</span>
         <span class="resultado__item-license">{{ license }}</span>
       </footer>
-    </a>
+    </div>
+
+    <div class="resultado__item-stars">
+      <img src="@/assets/images/star-icon.svg" alt="icon star">
+      <span class="resultado__item-count">{{ stars }}</span>
+    </div>
   </article>
 </template>
 
@@ -76,15 +78,11 @@ export default {
   .resultado__item {
     background-color: #fff;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-    margin-bottom: 25px;
-    position: relative;
-  }
-
-  .resultado__item-link {
     color: var(--color-font-primary);
     display: flex;
-    padding: 20px 15px;
-    text-decoration: none;
+    margin-bottom: 25px;
+    position: relative;
+    padding: 15px;
   }
 
   .resultado__item-avatar {
@@ -101,11 +99,17 @@ export default {
     margin-left: 15px;
   }
 
+  .resultado__item-link {
+    display: table;
+    margin-bottom: 10px;
+    text-decoration: none;
+  }
+
   .resultado__item-title {
     color: #0366D6;
     font-size: 18px;
     margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 0;
   }
 
   .resultado__item-description {
@@ -121,17 +125,26 @@ export default {
   }
 
   .resultado__item-footer {
+    display: flex;
     font-size: 14px;
-    position: absolute;
-    bottom: 15px;
-    left: 90px;
-  }
-
-  .resultado__item-license {
     margin-left: 15px;
   }
 
+  .resultado__item-license {
+    margin-left: 25px;
+  }
+
   @media (min-width: 768px) {
+    .resultado__item {
+      padding: 15px 20px;
+    }
+
+    .resultado__item-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
     .resultado__item-avatar > img {
       width: 90px;
       height: 90px;
@@ -167,7 +180,7 @@ export default {
     }
 
     .resultado__item-footer {
-      left: 130px;
+      margin-left: 25px;
     }
 
     .resultado__item-license {
