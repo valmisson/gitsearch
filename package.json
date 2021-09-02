@@ -6,7 +6,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "gh-pages": "run-s build push-gh-pages",
+    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -27,6 +29,8 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-standard": "^5.0.0",
     "eslint-plugin-vue": "^7.12.1",
+    "npm-run-all": "^4.1.5",
+    "push-dir": "^0.4.1",
     "vue-template-compiler": "^2.6.14"
   }
 }
