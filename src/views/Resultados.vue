@@ -2,7 +2,7 @@
   <main class="resultados container">
     <header class="resultados__header row">
       <h1 class="resultados__header-brand">
-        <a href="/">GitSearch</a>
+        <a href="/gitsearch">GitSearch</a>
       </h1>
       <search-form class="col-md-8 col-lg-6 offset-md-1 offset-lg-2" />
     </header>
@@ -26,7 +26,7 @@
         :container-class="'pagination'"
         :page-link-class="'page-link'"
         :page-class="'page-item'"
-        v-if="resultado.length > 0" />
+        v-if="showPaginate" />
 
     </section>
 
@@ -57,6 +57,7 @@ export default {
       totalResultado: '',
       resultado: [],
       pageNumber: parseInt(this.$route.query.page),
+      showPaginate: false,
       isLoading: false
     }
   },
@@ -84,10 +85,11 @@ export default {
 
         this.totalResultado = total_count
         this.resultado = items
+        this.showPaginate = this.totalResultado > 30
 
         this.isLoading = false
       } catch (error) {
-        console.log(error)
+        throw new Error(error)
       }
     },
 
