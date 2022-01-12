@@ -24,7 +24,7 @@ export default {
         return this.$router.push({
           path: '/search/repositorio',
           query: { q: this.searchTerm, page: 1, lang: 'all' }
-        })
+        }).catch(err => err)
       }
 
       inputSearchEl.classList.add('error')
