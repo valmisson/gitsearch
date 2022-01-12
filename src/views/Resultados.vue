@@ -7,7 +7,13 @@
       <search-form class="col-md-8 col-lg-6 offset-md-1 offset-lg-2" />
     </header>
     <section class="resultado" v-show="!isLoading">
-      <resultado-count :count="totalResultado"/>
+      <div class="container">
+        <div class="resultado__details row">
+          <resultado-count :count="totalResultado"/>
+
+          <filter-language @select-language="getFilterLanguage" />
+        </div>
+      </div>
 
       <ul class="resultado__content row">
         <li v-for="item in resultado" :key="item.id" class="resultado__content-item col-lg-6">
@@ -38,6 +44,7 @@
 import SearchForm from '@/components/home/SearchForm.vue'
 import ResultadoCount from '@/components/resultados/ResultadoCount.vue'
 import Resultado from '@/components/resultados/Resultado.vue'
+import FilterLanguage from '@/components/resultados/FilterLanguage.vue'
 import Loading from '@/components/layout/Loading.vue'
 import Paginate from 'vuejs-paginate'
 import HTTPClient from '@/services'
@@ -48,6 +55,7 @@ export default {
     SearchForm,
     ResultadoCount,
     Resultado,
+    FilterLanguage,
     Loading,
     Paginate
   },
@@ -55,6 +63,7 @@ export default {
   data () {
     return {
       totalResultado: '',
+      language: this.$route.query.lang,
       resultado: [],
       pageNumber: parseInt(this.$route.query.page),
       showPaginate: false,
@@ -69,8 +78,15 @@ export default {
   watch: {
     '$route' () {
       this.pageNumber = parseInt(this.$route.query.page)
+      this.language = this.$route.query.lang
 
       this.getRepositories(this.pageNumber)
+    },
+
+    language () {
+      const { query } = this.$route
+
+      this.$router.push({ query: { ...query, page: 1, lang: this.language } })
     }
   },
 
@@ -80,7 +96,9 @@ export default {
         this.isLoading = true
 
         const query = this.$route.query.q
-        const repo = await HTTPClient.get(`search/repositories?q=${query}&page=${page}`)
+        const querySearch = this.language === 'all' ? query : `${query} language:${this.language}`
+
+        const repo = await HTTPClient.get(`search/repositories?q=${querySearch}&page=${page}`)
         const { total_count, items } = repo.data
 
         this.totalResultado = total_count
@@ -91,6 +109,10 @@ export default {
       } catch (error) {
         throw new Error(error)
       }
+    },
+
+    getFilterLanguage (language) {
+      this.language = language
     },
 
     pagination (pageNum) {
@@ -128,6 +150,12 @@ export default {
     font-size: 20px;
     margin-bottom: 15px;
     text-decoration: none;
+  }
+
+  .resultado__details {
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 60px;
   }
 
   .resultado__content {

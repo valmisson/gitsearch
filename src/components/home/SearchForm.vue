@@ -21,7 +21,10 @@ export default {
       if (this.searchTerm.length > 0) {
         inputSearchEl.classList.remove('error')
 
-        return this.$router.push({ path: '/search/repositorio', query: { q: this.searchTerm, page: 1 } })
+        return this.$router.push({
+          path: '/search/repositorio',
+          query: { q: this.searchTerm, page: 1, lang: 'all' }
+        })
       }
 
       inputSearchEl.classList.add('error')

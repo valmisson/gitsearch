@@ -1,5 +1,5 @@
 <template>
-  <div class="resultado__count col-12">
+  <div class="resultado__count">
     <h3>{{ count.toLocaleString() }} resultados</h3>
   </div>
 </template>
@@ -18,7 +18,6 @@ export default {
 <style scoped>
   .resultado__count {
     color: var(--color-font-primary);
-    margin-top: 60px;
     padding: 0;
   }
 
