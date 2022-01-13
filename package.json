@@ -7,8 +7,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "gh-pages": "run-s build push-gh-pages",
-    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
+    "deploy": "run-s build gh-pages",
+    "gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
   },
   "dependencies": {
     "axios": "^0.24.0",
