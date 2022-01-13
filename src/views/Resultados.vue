@@ -24,7 +24,7 @@
       <paginate
         v-model="pageNumber"
         :click-handler="pagination"
-        :page-count="34"
+        :page-count="pageCount"
         :prev-text="'&#x3c;'"
         :next-text="'&#x3e;'"
         :prev-class="'controlls'"
@@ -62,10 +62,11 @@ export default {
 
   data () {
     return {
-      totalResultado: '',
+      totalResultado: 0,
       language: this.$route.query.lang,
       resultado: [],
       pageNumber: parseInt(this.$route.query.page),
+      pageCount: 34,
       showPaginate: false,
       isLoading: false
     }
@@ -86,7 +87,13 @@ export default {
     language () {
       const { query } = this.$route
 
-      this.$router.push({ query: { ...query, page: 1, lang: this.language } })
+      this.$router.push({
+        query: {
+          ...query,
+          page: 1,
+          lang: this.language
+        }
+      }).catch(err => err)
     }
   },
 
@@ -105,8 +112,15 @@ export default {
         this.resultado = items
         this.showPaginate = this.totalResultado > 30
 
+        const pageCount = Math.round(total_count / 30)
+        const pageNumber = (pageCount * 30) > total_count ? pageCount : pageCount + 1
+
+        this.pageCount = pageNumber <= 34 ? pageNumber : 34
+
         this.isLoading = false
       } catch (error) {
+        this.isLoading = false
+
         throw new Error(error)
       }
     },
