@@ -1,11 +1,9 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import routes from './router'
 
-Vue.use(Router)
-
-export default new Router({
-  mode: 'history',
-  base: '/gitsearch/',
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
+
+export default router

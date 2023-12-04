@@ -3,34 +3,28 @@
   "version": "1.1.0",
   "description": "Buscar repositórios do Github",
   "private": true,
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "deploy": "run-s build gh-pages",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js --fix --ignore-path .gitignore",
+    "deploy": "run-s build gh-404 gh-pages",
+    "gh-404": "cd dist/ && cp index.html 404.html",
     "gh-pages": "gh-pages -d dist"
   },
   "dependencies": {
-    "axios": "^1.2.2",
-    "core-js": "^3.21.1",
-    "vue": "2.7.14",
-    "vue-router": "3.6.5",
-    "vuejs-paginate": "^2.1.0"
+    "axios": "^1.6.2",
+    "vue": "^3.3.9",
+    "vue-awesome-paginate": "^1.1.46",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.19.1",
-    "@vue/cli-plugin-babel": "^5.0.8",
-    "@vue/cli-plugin-eslint": "^5.0.8",
-    "@vue/cli-service": "^5.0.8",
-    "@vue/eslint-config-standard": "^8.0.1",
-    "eslint": "^8.31.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-standard": "^5.0.0",
-    "eslint-plugin-vue": "^9.8.0",
-    "gh-pages": "^4.0.0",
+    "@vitejs/plugin-vue": "^4.5.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-vue": "^9.19.2",
+    "gh-pages": "^6.1.0",
     "npm-run-all": "^4.1.5",
-    "vue-template-compiler": "^2.7.14"
+    "vite": "^5.0.4"
   }
 }

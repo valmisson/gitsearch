@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import router from './routes'
 
@@ -6,9 +6,8 @@ import router from './routes'
 import './assets/css/normalize.css'
 import './assets/css/flexgrid.css'
 
-Vue.config.productionTip = false
+const app = createApp(App)
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+app.use(router)
+
+app.mount('#app')
