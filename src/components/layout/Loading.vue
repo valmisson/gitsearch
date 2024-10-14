@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'Loading'
+  name: 'LayoutLoading'
 }
 </script>
 
