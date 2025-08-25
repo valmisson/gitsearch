@@ -10,28 +10,20 @@
 </template>
 
 <script>
+import languageList from '@/utils/languageList';
+
 export default {
   name: 'FilterLanguage',
   data () {
     return {
-      language: this.$route.query.lang,
-      languageList: [
-        { value: 'all', label: 'Todas' },
-        { value: 'javascript', label: 'Javascript' },
-        { value: 'typescript', label: 'Typescript' },
-        { value: 'html', label: 'HTML' },
-        { value: 'css', label: 'CSS' },
-        { value: 'vue', label: 'Vue' },
-        { value: 'svelte', label: 'Svelte' },
-        { value: 'rust', label: 'Rust' },
-        { value: 'python', label: 'Python' }
-      ]
+      language: this.$route.query.lang ?? 'all',
+      languageList
     }
   },
 
   watch: {
     '$route' () {
-      this.language = this.$route.query.lang
+      this.language = this.$route.query.lang ?? 'all'
     }
   },
 

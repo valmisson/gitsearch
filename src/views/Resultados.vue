@@ -61,7 +61,7 @@ export default {
       totalResultado: 0,
       language: this.$route.query.lang,
       resultado: [],
-      pageNumber: parseInt(this.$route.query.page),
+      pageNumber: parseInt(this.$route.query.page) || 1,
       pageCount: 34,
       showPaginate: false,
       isLoading: false
@@ -69,15 +69,15 @@ export default {
   },
 
   mounted () {
-    this.getRepositories(this.pageNumber)
+    this.getRepositories(this.pageNumber, this.language)
   },
 
   watch: {
     '$route' () {
-      this.pageNumber = parseInt(this.$route.query.page)
+      this.pageNumber = parseInt(this.$route.query.page) || 1
       this.language = this.$route.query.lang
 
-      this.getRepositories(this.pageNumber)
+      this.getRepositories(this.pageNumber, this.language)
     },
 
     language () {
@@ -94,12 +94,14 @@ export default {
   },
 
   methods: {
-    async getRepositories (page) {
+    async getRepositories (page, language = 'all') {
       try {
         this.isLoading = true
 
         const query = this.$route.query.q
-        const querySearch = this.language === 'all' ? query : `${query} language:${this.language}`
+        const querySearch = encodeURIComponent(
+          language === 'all' ? query : `${query} language:${language}`
+        )
 
         const repo = await HTTPClient.get(`search/repositories?q=${querySearch}&page=${page}`)
         const { total_count, items } = repo.data
